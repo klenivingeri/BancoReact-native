@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import {
   View,
@@ -8,6 +9,8 @@ import {
   ScrollView,
   FlatList
   } from 'react-native';
+
+  import Pessoa from './src/Pessoa'
 
 class App extends Component{
   constructor(props){
@@ -43,34 +46,13 @@ const styles = StyleSheet.create({
   container:{
     flex:1,
   },
-  areaPessoa:{
-    backgroundColor: '#222',
-    height:200,
-    marginBottom:15
-  },
-  textoPessoa:{
-    color: '#FFF',
-    fontSize:20,
 
-
-  }
 
 });
 
 export default App;
 
-class Pessoa extends Component{
 
-  render(){
-    return(
-      <View style={styles.areaPessoa}>
-        <Text style={styles.textoPessoa}>Nome: {this.props.data.nome}</Text>
-        <Text style={styles.textoPessoa}>Idade: {this.props.data.idade}</Text>
-        <Text style={styles.textoPessoa}>Email: {this.props.data.email}</Text>
-      </View>
-    );
-  }
-}
 
 
 
@@ -80,6 +62,11 @@ class Pessoa extends Component{
 /*
  tira o scroll da barra lateral showsVerticalScrollIndicator
 o ScrollView vem com o  scrollEnabled false trava a tela, true solta a tela
+
+
+
+Pode criar uma pasta com o nome do component, e salvar o file dentro dela  como index,
+não precisa colocar nome, pq o react já procura o index dentro da pasta
 
 
 
