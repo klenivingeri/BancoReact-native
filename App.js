@@ -10,33 +10,45 @@ import {
   FlatList
   } from 'react-native';
 
-  import Pessoa from './src/Pessoa'
+  import {Picker} from '@react-native-picker/picker';
 
 class App extends Component{
+
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
-      feed:[
-        {id: '0', nome: 'Erick0', idade:28, email:'erick0@gmail.com'},
-        {id: '1', nome: 'Erick1', idade:28, email:'erick1@gmail.com'},
-        {id: '2', nome: 'Erick2', idade:28, email:'erick2@gmail.com'},
-        {id: '3', nome: 'Erick3', idade:28, email:'erick3@gmail.com'},
-        {id: '4', nome: 'Erick3', idade:28, email:'erick4@gmail.com'},
-        {id: '5', nome: 'Erick3', idade:28, email:'erick5@gmail.com'},
+      pizza: 0,
+      pizzas: [
+        {key: '1', nome:'Strogonoff', valor: 60},
+        {key: '2', nome:'Calabresa', valor: 50},
+        {key: '3', nome:'Quatro queijos', valor: 60.99 },
+        {key: '4', nome:'Brigadeiro', valor: 30},
+        {key: '5', nome:'Banana', valor: 30}
       ]
     }
   }
 
 
   render(){
+
+    let pizzaItem = this.state.pizzas.map((v,k) => {
+      return <Picker.item key={k} value={k} label={v.nome} />
+    })
     return(
       <View style={styles.container}> 
 
-          <FlatList
-          data={this.state.feed}
-          keyExtractor={(item) => item.id}
-          renderItem={ ({item}) => <Pessoa data={item}/> } />
+        <Text style={styles.logo}> Menu Pizza</Text>
 
+        <Picker
+        selectedValue={this.state.pizza}
+        onValueChange={ (itemValue,itemIndex)=> this.setState({pizza: itemValue})}
+        >
+          {pizzaItem}
+        </Picker>
+
+        <Text  style={styles.pizza}>Você escolheu: {this.state.pizzas[this.state.pizza].nome}</Text>
+        <Text  style={styles.pizza}>R$:{this.state.pizzas[this.state.pizza].valor.toFixed(2)}</Text>
+   
       </View>    
     );
   }
@@ -45,7 +57,21 @@ class App extends Component{
 const styles = StyleSheet.create({
   container:{
     flex:1,
+    marginTop: 20,
+    
+
   },
+  logo:{
+    textAlign: 'center',
+    fontSize:28,
+    fontWeight: 'bold'
+    
+  },
+  pizza:{
+    marginTop: 15,
+    fontSize:28,
+    textAlign: 'center'
+  }
 
 
 });
@@ -65,10 +91,21 @@ o ScrollView vem com o  scrollEnabled false trava a tela, true solta a tela
 
 
 
-Pode criar uma pasta com o nome do component, e salvar o file dentro dela  como index,
+Pode criar uma pasta com o nome do component já representando o file, e salvar o  dentro dela  como index,
 não precisa colocar nome, pq o react já procura o index dentro da pasta
 
 
 
+------------------------------------------------
+Documentação Picker: 
+
+https://github.com/react-native-picker/picker
+
+Comando para instalar: 
+
+npm install @react-native-picker/picker​​
+​E após instalar só importar:
+
+import {Picker} from '@react-native-picker/picker';
 
 */
