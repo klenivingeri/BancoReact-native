@@ -5,21 +5,35 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  FlatList
   } from 'react-native';
 
 class App extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      feed:[
+        {id: '0', nome: 'Erick0', idade:28, email:'erick0@gmail.com'},
+        {id: '1', nome: 'Erick1', idade:28, email:'erick1@gmail.com'},
+        {id: '2', nome: 'Erick2', idade:28, email:'erick2@gmail.com'},
+        {id: '3', nome: 'Erick3', idade:28, email:'erick3@gmail.com'},
+        {id: '4', nome: 'Erick3', idade:28, email:'erick4@gmail.com'},
+        {id: '5', nome: 'Erick3', idade:28, email:'erick5@gmail.com'},
+      ]
+    }
+  }
 
 
   render(){
     return(
       <View style={styles.container}> 
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.box1}></View>
-          <View style={styles.box2}></View>
-          <View style={styles.box3}></View>
-          <View style={styles.box4}></View>
-        </ScrollView>
+
+          <FlatList
+          data={this.state.feed}
+          keyExtractor={(item) => item.id}
+          renderItem={ ({item}) => <Pessoa data={item}/> } />
+
       </View>    
     );
   }
@@ -28,28 +42,39 @@ class App extends Component{
 const styles = StyleSheet.create({
   container:{
     flex:1,
-  
   },
-  box1:{
-    backgroundColor:'red',
-    height:250
+  areaPessoa:{
+    backgroundColor: '#222',
+    height:200,
+    marginBottom:15
   },
-  box2:{
-    backgroundColor:'green',
-    height:250
-  },
-  box3:{
-    backgroundColor:'yellow',
-    height:250
-  },
-  box4:{
-    backgroundColor:'blue',
-    height:250
+  textoPessoa:{
+    color: '#FFF',
+    fontSize:20,
+
+
   }
 
 });
 
 export default App;
+
+class Pessoa extends Component{
+
+  render(){
+    return(
+      <View style={styles.areaPessoa}>
+        <Text style={styles.textoPessoa}>Nome: {this.props.data.nome}</Text>
+        <Text style={styles.textoPessoa}>Idade: {this.props.data.idade}</Text>
+        <Text style={styles.textoPessoa}>Email: {this.props.data.email}</Text>
+      </View>
+    );
+  }
+}
+
+
+
+
 
 
 /*
