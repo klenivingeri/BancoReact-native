@@ -7,16 +7,17 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  FlatList
+  FlatList, // cria uma lista
+  Switch // botão de liga e desliga
   } from 'react-native';
 
-import Slider from '@react-native-community/slider';
+
 
 class App extends Component{
   constructor(props){
     super(props)
     this.state = {
-      valor: 50
+      status: false
     }
   }
 
@@ -24,18 +25,14 @@ class App extends Component{
 
     return(
       <View style={styles.container}> 
-          <Slider
-          minimumValue={0}
-          maximumValue={100}
-          onValueChange={ (valorSelecionado) => this.setState({valor: valorSelecionado})}
-          value={this.state.valor}
-          minimumTrackTintColor="blue"
-          maximumTrackTintColor="red"
-          />
-          <Text style={{textAlign: 'center', fontSize: 20}}>
-            {this.state.valor.toFixed(0)}
-          </Text>
-        
+        <Switch 
+        value={this.state.status}
+        onValueChange={(valorSwitch)=> this.setState({ status:valorSwitch})}
+        thumbColor="blue"
+        />
+        <Text style={{textAlign:'center', fontSize:20}}>
+          {this.state.status ? "Ativo": "Inativo"}
+        </Text>
       </View>    
     );
   }
@@ -82,6 +79,20 @@ import {Picker} from '@react-native-picker/picker';
 
 
 ------------------------------------------------
+
+Documentação Slider
+npm install @react-native-community/slider
+import Slider from '@react-native-community/slider'
+
+
+
+------------------------------------------------
+
+Documentação Slider
 npm install @react-native-community/slider
 import Slider from '@react-native-community/slider'
 */
+
+
+
+
